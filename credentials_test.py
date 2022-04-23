@@ -18,7 +18,7 @@ class TestCredentials (unittest.TestCase):
         self.new_credentials =Credentials ("Facebook","peter_p@gmail.com", "peterpan","12345pp") 
 
     
-    # Teardown mthd resets credential list after every testcase
+    # Teardown resets credential list after every testcase
     def tearDown(self):
         Credentials.credential_list = []    
 
@@ -32,16 +32,21 @@ class TestCredentials (unittest.TestCase):
         self.assertEqual(self.new_credentials.password,"12345pp")
 
 
-    def test_save_cridential(self):
+    def test_save_credential(self):
         '''
-        test case to check for saved cridentials.
+        test case2 to check for saved cridentials.
         '''
         #saving new credential
-        self.new_credentials.save_cridentials() 
+        self.new_credentials.save_credentials() 
         self.assertEqual(len(Credentials.credential_list),1)
 
+    def test_save_multiple_credentials(self):
+        '''Test case3 checks if we can save multiple credentials'''
 
-
+        self.new_credentials.save_credentials()
+        test_credential =Credentials("Instagram","peter_p@gmail.com","peter_pan","P!3t3rp@n")
+        test_credential.save_credentials()
+        self.assertEqual(len(Credentials.credential_list),2)
 
 
 
