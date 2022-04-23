@@ -44,7 +44,7 @@ class TestCredentials (unittest.TestCase):
         '''Test case3 checks if we can save multiple credentials'''
 
         self.new_credentials.save_credentials()
-        test_credential =Credentials("Instagram","peter_p@gmail.com","peter_pan","P!3t3rp@n")
+        test_credential =Credentials("Instagram","peter_p@gmail.com","peter-pan","P!3t3rp@n")
         test_credential.save_credentials()
         self.assertEqual(len(Credentials.credential_list),2)
 
@@ -55,11 +55,25 @@ class TestCredentials (unittest.TestCase):
         '''
 
         self.new_credentials.save_credentials()
-        test_credentials =Credentials("Instagram","peter_p@gmail.com","peter_pan","P!3t3rp@n")
+        test_credentials =Credentials("Instagram","peter_p@gmail.com","peterp","P!3t3rp@n")
         test_credentials.save_credentials()
         #Deleting credentials
         self.new_credentials.delete_credentials()
         self.assertEqual(len(Credentials.credential_list),1)
+
+    def test_find_by_username(self):
+        '''
+        Testcase5:tests to find cridentials by user account 
+        '''
+
+        self.new_credentials.save_credentials()
+        test_credentials = Credentials("Instagram","peter_p@gmail.com","peterp","P!3t3rp@n")
+        test_credentials.save_credentials()
+
+        found_credentials = Credentials.find_by_username("peterp")
+        self.assertEqual(found_credentials.username, test_credentials.username)
+
+
 
 
 
