@@ -14,7 +14,7 @@ class Credentials:
     #empty cridential list
     credential_list = []
       
-    def save_cridentials(self):
+    def save_credentials(self):
         '''
         Saves credentials into cridential_list
         '''
