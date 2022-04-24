@@ -4,8 +4,6 @@ TDD
      * Args:
           -Username -Password
 - Save user account
-    *user info:
-        -username,password & credentials
 """
 
 import unittest
@@ -34,7 +32,13 @@ class TestUser(unittest.TestCase):
         test_user.save_user()
 
 
-
+    def test_delete_user(self):
+        self.new_user.save_user()
+        test_user =User("petermain","P@n_main")
+        test_user.save_user()
+        
+        self.new_user.delete_user()
+        self.assertEqual(len(User.user_list),1)
 
 
 if __name__ == '__main__':
