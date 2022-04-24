@@ -114,10 +114,17 @@ def main():
             entered_password = input("Your password...")
             confirm_password = input("Confirm password...")
             print("\n")
-            print("."*60)
-            print(f" Welcome { entered_username} to your Account.") 
-            print("."*60)
-         
+            if entered_username != created_username or  entered_password != created_password:
+
+                print("Invalid username or password")
+                entered_username = input("Enter username...")
+                entered_password = input("Your password...")
+                confirm_password = input("Confirm password...")
+                print("."*60)
+                
+            else:
+                print(f" Welcome { entered_username} to your Account.") 
+                print("."*60)        
             while True:
                 print("Use these short codes : cc - create a new credential, dc - display credential, fc -find a credential, ex -exit the credential list")
 
