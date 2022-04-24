@@ -28,10 +28,10 @@ class TestUser(unittest.TestCase):
         
 
     #testcase2
-    # def test_save_user(self):
-    #     self.new_user.save_user()
-    #     test_user = User("petermain","P@n_main")
-    #     test_user.save_user()
+    def test_save_user(self):
+        self.new_user.save_user()
+        test_user = User("petermain","P@n_main")
+        test_user.save_user()
 
 
 

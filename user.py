@@ -10,7 +10,10 @@ class User:
         self.username = username
         self.password = password
        
-       
+
+    def save_user(self):
+        '''saves new user'''
+        User.user_list.append(self)
 
 
 
