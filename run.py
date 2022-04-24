@@ -8,7 +8,8 @@ def passwrdgen():
     passwrd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz!@#$%^&*()_-?/"
     passwrd_len = int(input("Enter the length of the password"))
     p = " ".join(random.sample(passwrd,passwrd_len))
-    print(f"Your password is:{p}")
+    # print(f"Your password is:{p}")
+    return p
 
 
 # User methods
@@ -78,7 +79,6 @@ def main():
         print("."*60)
         print("\n")
         short_code = input().lower()
-        print("\n")
 
         if short_code == "ca":
             print("Create username")
@@ -92,14 +92,102 @@ def main():
 
             while confirm_password != created_password:
                 print("Invalid password!")
+
                 print("Enter your password")
                 created_password = input()
+
                 print("Confirm password")
                 confirm_password = input()
 
+                save_users(create_user(username, password)) 
+
+            else:
+                print("\n")
+                print(f" Conratulations {created_username}! Account creation  was successful.") 
+                print("."*60)
+
+                print("Proceed to login")
+                print("."*60)
+    
+        elif short_code == "lg":
+            entered_username = input("Enter username...")
+            entered_password = input("Your password...")
+            confirm_password = input("Confirm password...")
+            print("\n")
+            print("."*60)
+            print(f" Welcome { entered_username} to your Account.") 
+            print("."*60)
+         
+            while True:
+                print("Use these short codes : cc - create a new credential, dc - display credential, fc -find a credential, ex -exit the credential list")
+
+                short_code = input().lower()
+                if short_code == "cc":
+                    print("New Credentials")
+                    print("."*60)
+                    user_acc = input("Enter account type e.g snapchat:... ")
+                    email = input("Enter email account used for account registration:... ")
+                    username = input("Enter username for account:... ")
+
+                    print(f"Would you like to generate a password for your {user_acc} account? yes or no")
+                    response = input().lower()
+                    if response == "yes":
+                        password =(passwrdgen())
+                        print("."*60)
+                        print(f" your password is: {password}")
+
+                        save_credentials(create_credential(user_acc,email,username, password))
+
+                    elif response == "no":
+                        passwrd_len = int(input("Enter the length of the password:..."))
+                        password = input("Enter password for the account:... ")
+                    
+                        save_credentials(create_credential(user_acc,email,username, password))
+                        print("\n")
+                        print(f"Your {user_acc} account credentials have been saved.") 
+                    else:
+                        print("."*60)
+
+                elif short_code == "dc":
+                    if display_details():
+                        print("Your saved credentials: ")
+                        print("."*60)
+                        for credentials in Credentials.credential_list:
+                            print(f"Account: {user_acc} , Email: {email} , Username: {username} , Password: {password}")
+
+                        print("."*60)
+                        print(" Would you like to delete credentials? yes or no")
+                        response = input().lower()
+                        if response == "yes":
+                            del_credentials(credentials)
+                            print("Credentials deleted successfully")
+                        elif response == "no":
+                            print("Deletion cancelled.")
+                        else:
+                             print("."*60)
+                    else:
+                        print("No credentials found")
+                        print("."*60)
+
+                elif short_code == "fc":
+                        find = input("Enter account name you are trying to find: ").lower()
+                        if find_credentials(username):
+                            find = find_credentials(username)
+                            print("."*60)
+                            print(f"Account:{find.user_acc}, Username:{find.username},Email:{find.email}, Password:{find.password}")
+                            print("."*60)
+
+                        else:
+                            print("Credentials do not exist")
 
 
+                elif short_code == "ex":
+                            print("Have a lovely Day")
+                            break
+                        
+                else:
+                            print("I really didn't get that. Please use the short codes")
+                        
 
 if __name__ == '__main__':
-
     main()
